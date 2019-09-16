@@ -73,6 +73,48 @@ $con = @mysqli_connect($host,$user,$pass,$base);
         }    
         var_dump($user_arr);
         break;
+
+        case "Insert_pr":
+
+        $sql = "INSERT INTO `productos`(`codigo_barra`, `nombre`, `path_foto`) VALUES ('777777','Naranja','pppp')";
+        $rs = $con->query($sql);
+
+        echo "Filas afectadas: " . mysqli_affected_rows($con) ;
+        break;
+
+        case "MostrarTodos_pr":
+        $sql = "SELECT * FROM productos";
+        $rs = $con->query($sql);
+
+        while ($row = $rs->fetch_object()){
+            $user_arr[] = $row;
+        }    
+        var_dump($user_arr);
+        break;
+
+        case "Delete_pr":
+        $sql = "DELETE FROM `productos` WHERE `id`=2";
+        $rs = $con->query($sql);
+
+        echo "Filas afectadas: " . mysqli_affected_rows($con) ;
+        break;
+
+        case "Update_pr":
+        $sql = "UPDATE `productos` SET `codigo_barra`='55555555',`nombre`='Pera_m',`path_foto`='ssssssss' WHERE `id`=2";
+        $rs = $con->query($sql);
+
+        echo "Filas afectadas: " . mysqli_affected_rows($con) ;
+        break;
+
+        case "MostrarPorId_pr":
+        $sql = "SELECT `id`, `codigo_barra`, `nombre`, `path_foto` FROM `productos` WHERE `id`=3";
+        $rs = $con->query($sql);
+
+        while ($row = $rs->fetch_object()){
+            $user_arr[] = $row;
+        }    
+        var_dump($user_arr);
+        break;
     }
 
     mysqli_close($con);
