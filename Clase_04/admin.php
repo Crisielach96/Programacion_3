@@ -7,6 +7,18 @@ $pass="";
 $host="localhost";
 $base="mercado";
 
+$id = isset($_POST['id']) ? $_POST['id'] : NULL;
+$name = isset($_POST['name']) ? $_POST['name'] : NULL;
+$lastName = isset($_POST['lastName']) ? $_POST['lastName'] : NULL;
+$estado = isset($_POST['estado']) ? $_POST['estado'] : NULL;
+$clave = isset($_POST['clave']) ? $_POST['clave'] : NULL;
+$perfil = isset($_POST['perfil']) ? $_POST['perfil'] : NULL;
+
+$id_producto = isset($_POST['id_p']) ? $_POST['id_p'] : NULL;
+$cod_barra = isset($_POST['cod_barra']) ? $_POST['cod_barra'] : NULL;
+$productName = isset($_POST['productName']) ? $_POST['productName'] : NULL;
+$image_path = isset($_POST['image_path']) ? $_POST['image_path'] : NULL;
+
 $con = @mysqli_connect($host,$user,$pass,$base);
 
     if(!$con)
@@ -24,7 +36,7 @@ $con = @mysqli_connect($host,$user,$pass,$base);
 
         case "Insert_us":
 
-        $sql = "INSERT INTO `usuarios`(`nombe`, `apellido`, `clave`, `perfil`, `estado`) VALUES ('Hernan','Malonos','9514',5,2)";
+        $sql = "INSERT INTO `usuarios`(`nombe`, `apellido`, `clave`, `perfil`, `estado`) VALUES ('$name','$lastName','$clave',$perfil,$estado)";
         $rs = $con->query($sql);
 
         echo "Filas afectadas: " . mysqli_affected_rows($con) ;
@@ -41,21 +53,21 @@ $con = @mysqli_connect($host,$user,$pass,$base);
         break;
 
         case "Delete_us":
-        $sql = "DELETE FROM `usuarios` WHERE `id`=5";
+        $sql = "DELETE FROM `usuarios` WHERE `id`=$id";
         $rs = $con->query($sql);
 
         echo "Filas afectadas: " . mysqli_affected_rows($con) ;
         break;
 
         case "Update_us":
-        $sql = "UPDATE `usuarios` SET `nombe`='Damian_m',`apellido`='Sielach_m',`clave`='111',`perfil`=1,`estado`=1 WHERE `id`=5";
+        $sql = "UPDATE `usuarios` SET `nombe`='$name',`apellido`='$lastName',`clave`='$clave',`perfil`=$perfil,`estado`=$estado WHERE `id`=$id";
         $rs = $con->query($sql);
 
         echo "Filas afectadas: " . mysqli_affected_rows($con) ;
         break;
 
         case "MostrarPorId_us":
-        $sql = "SELECT `id`, `nombe`, `apellido`, `clave`, `perfil`, `estado` FROM `usuarios` WHERE `id`=7";
+        $sql = "SELECT `id`, `nombe`, `apellido`, `clave`, `perfil`, `estado` FROM `usuarios` WHERE `id`=$id";
         $rs = $con->query($sql);
 
         while ($row = $rs->fetch_object()){
@@ -65,7 +77,7 @@ $con = @mysqli_connect($host,$user,$pass,$base);
         break;
 
         case "MostrarPorEstado_us":
-        $sql = "SELECT * FROM `usuarios` WHERE `estado`=1";
+        $sql = "SELECT * FROM `usuarios` WHERE `estado`=$estado";
         $rs = $con->query($sql);
 
         while ($row = $rs->fetch_object()){
@@ -76,7 +88,7 @@ $con = @mysqli_connect($host,$user,$pass,$base);
 
         case "Insert_pr":
 
-        $sql = "INSERT INTO `productos`(`codigo_barra`, `nombre`, `path_foto`) VALUES ('777777','Naranja','pppp')";
+        $sql = "INSERT INTO `productos`(`codigo_barra`, `nombre`, `path_foto`) VALUES ('$cod_barra','$productName','$image_path')";
         $rs = $con->query($sql);
 
         echo "Filas afectadas: " . mysqli_affected_rows($con) ;
@@ -93,21 +105,21 @@ $con = @mysqli_connect($host,$user,$pass,$base);
         break;
 
         case "Delete_pr":
-        $sql = "DELETE FROM `productos` WHERE `id`=2";
+        $sql = "DELETE FROM `productos` WHERE `id`=$id_producto";
         $rs = $con->query($sql);
 
         echo "Filas afectadas: " . mysqli_affected_rows($con) ;
         break;
 
         case "Update_pr":
-        $sql = "UPDATE `productos` SET `codigo_barra`='55555555',`nombre`='Pera_m',`path_foto`='ssssssss' WHERE `id`=2";
+        $sql = "UPDATE `productos` SET `codigo_barra`='$cod_barra',`nombre`='$productName',`path_foto`='$image_path' WHERE `id`=$id_producto";
         $rs = $con->query($sql);
 
         echo "Filas afectadas: " . mysqli_affected_rows($con) ;
         break;
 
         case "MostrarPorId_pr":
-        $sql = "SELECT `id`, `codigo_barra`, `nombre`, `path_foto` FROM `productos` WHERE `id`=3";
+        $sql = "SELECT `id`, `codigo_barra`, `nombre`, `path_foto` FROM `productos` WHERE `id`=$id_producto";
         $rs = $con->query($sql);
 
         while ($row = $rs->fetch_object()){
