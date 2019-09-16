@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-09-2019 a las 15:23:33
+-- Tiempo de generación: 16-09-2019 a las 17:03:16
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.2
 
@@ -42,7 +42,7 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id`, `codigo_barra`, `nombre`, `path_foto`) VALUES
-(2, '52369', 'Pera', NULL);
+(3, '777777', 'Naranja', 'pppp');
 
 -- --------------------------------------------------------
 
@@ -64,10 +64,9 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `nombe`, `apellido`, `clave`, `perfil`, `estado`) VALUES
-(1, 'Cristian_m', 'Sielach_m', '123', 1, 2),
 (3, 'Luis', 'Sielach', '789', 3, 1),
-(5, 'Damian', 'Sielach', '456', 2, 2),
-(6, 'Karina', 'Malonos', '987', 4, 1);
+(6, 'Karina', 'Malonos', '987', 4, 1),
+(7, 'Hernan', 'Malonos', '9514', 5, 2);
 
 --
 -- Índices para tablas volcadas
@@ -93,13 +92,13 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
