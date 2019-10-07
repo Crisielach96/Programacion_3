@@ -1,0 +1,50 @@
+1. Obtener los detalles completos de todos los productos, ordenados alfabéticamente
+SELECT * FROM `productos` ORDER BY pNombre ASC
+
+2. Obtener los detalles completos de todos los proveedores de ‘Quilmes’. 
+SELECT * FROM proveedores WHERE Localidad='Quilmes'
+
+3. Obtener todos los envíos en los cuales la cantidad este entre 200 y 300 inclusive.
+SELECT * FROM `envios` WHERE Cantidad>=200 AND Cantidad<=300
+
+4. Obtener la cantidad total de todos los productos enviados. 
+SELECT SUM(Cantidad) FROM `envios`
+
+5. Mostrar los primeros 3 números de productos que se han enviado.
+SELECT pNumero FROM `envios` LIMIT 3
+
+6. Mostrar los nombres de proveedores y los nombres de los productos enviados.
+SELECT productos.pNombre,proveedores.Nombre FROM envios,productos,proveedores WHERE envios.pNumero=productos.pNumero and proveedores.Numero=envios.Numero;
+
+7. Indicar el monto (cantidad * precio) de todos los envíos.    
+SELECT (envios.Cantidad*productos.Precio) as montoTotal FROM envios INNER JOIN productos ON productos.pNumero=envios.pNumero
+
+8. Obtener la cantidad total del producto 1 enviado por el proveedor 102.
+SELECT sum(Cantidad) as montoTotal FROM envios where Numero=102 and pNumero=1
+
+9. Obtener todos los números de los productos suministrados por algún proveedor de ‘Avellaneda’.
+SELECT envios.pNumero NumeroProductos , proveedores.Nombre Proveedor FROM productos,proveedores,envios WHERE proveedores.Numero=envios.Numero AND proveedores.Localidad='Avellaneda';
+
+10. Obtener los domicilios y localidades de los proveedores cuyos nombres contengan la letra ‘I’. 
+SELECT proveedores.Domicilio DomicilioProveedor, proveedores.Localidad localidadProveedor, proveedores.Nombre nombreConI FROM proveedores WHERE proveedores.Nombre LIKE '%i%'
+
+11. Agregar el producto número  4, llamado ‘Chocolate’, de tamaño chico y con un precio de 25,35. 
+INSERT INTO `productos`(`pNumero`, `pNombre`, `Precio`, `Tamanio`) VALUES (4,"Chocolate",25.35,"Chico")
+
+12. Insertar un nuevo proveedor (únicamente con los campos obligatorios). 
+INSERT INTO provedores (`Numero`) VALUES ('4')
+
+13. Insertar un nuevo proveedor (107), donde el nombre y la localidad son ‘Rosales’ y ‘La Plata’. 
+INSERT INTO proveedores (Numero,Nombre,Localidad) VALUES(107,'Rosales','La Plata');
+
+14. Cambiar los precios de los productos de tamaño ‘grande’ a 97,50. 
+UPDATE productos SET precio=97.50 WHERE productos.Tamanio="Grande"
+
+15. Cambiar el tamaño de ‘Chico’ a ‘Mediano’ de todos los productos cuyas cantidades sean mayores a 300 inclusive. 
+UPDATE productos set productos.Tamanio="Mediano" WHERE productos.Tamanio="Chico" AND productos.pNumero IN (SELECT envios.pNumero FROM envios WHERE envios.Cantidad>=300)
+
+16. Eliminar el  producto número 1. 
+DELETE FROM `productos` WHERE pNumero=1
+
+17. Eliminar a todos los proveedores que no han enviado productos. 
+DELETE FROM proveedores WHERE proveedores.Numero NOT IN (SELECT envios.Numero FROM envios);
